@@ -9,6 +9,14 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+  "main": "dist/react-redux.js",
+  "module": "dist/react-redux.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/react-redux.es.js",
+      "require": "./dist/react-redux.js"
+    }
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
     "axios": "^1.6.8",
@@ -17,7 +25,7 @@
     "react-country-flag": "^3.1.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
-    "react-redux": "^9.0.4",
+    "react-redux": "^9.1.0",
     "react-router-dom": "^6.21.1",
     "react-simple-maps": "^3.0.0",
     "recharts": "^2.10.3",
@@ -31,6 +39,6 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "vite": "^5.0.8"
+    "vite": "^5.2.8"
   }
 }

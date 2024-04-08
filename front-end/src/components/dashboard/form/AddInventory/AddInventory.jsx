@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { AddInventoryWrap } from "./AddInventory.style";
+import axios from "axios";
 
 const AddInvenory = () => {
   const [productName, setProductName] = useState("");
@@ -10,7 +11,7 @@ const AddInvenory = () => {
   const [price, setPrice] = useState("");
   const [images, setImages] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
       !productName.trim() ||
@@ -20,23 +21,49 @@ const AddInvenory = () => {
     )
       return;
 
-    const newInfo = {
-      id: parseInt(Math.random()),
-      productName,
-      quantity: parseInt(quantity),
-      price: parseFloat(price),
-      images: images.map((image) => URL.createObjectURL(image)),
-    };
-    console.log(newInfo);
-    setProductName("");
-    setQuantity("");
-    setPrice("");
-    setImages([]);
+    const formData = {
+      productName: productName,
+      quantity: quantity,
+      price: price,
+      images: images
+    }
+    try {
+      // Make a POST request using Axios
+      const response = await axios.post('http://localhost:5000/api/products', formData);
+      console.log(response.data); // Log the response from the server
+      // Clear form fields and images after successful submission
+      setProductName("");
+      setQuantity("");
+      setPrice("");
+      setImages([]);
+    } catch (error) {
+      console.error('Error submitting form:', error); // Log any errors
+    }
   };
 
   const handleImageChange = (e) => {
     const selectedImages = Array.from(e.target.files);
-    setImages(selectedImages);
+    const imageUrls = [];
+  
+    // Lặp qua từng tệp hình ảnh đã chọn
+    selectedImages.forEach(image => {
+      // Tạo một đối tượng FileReader
+      const reader = new FileReader();
+      
+      // Định nghĩa hàm xử lý khi đọc xong tệp
+      reader.onload = (event) => {
+        // Lấy đường dẫn của hình ảnh và thêm vào mảng imageUrls
+        imageUrls.push(event.target.result);
+        
+        // Kiểm tra nếu đã đọc xong tất cả các hình ảnh thì cập nhật state
+        if (imageUrls.length === selectedImages.length) {
+          setImages(imageUrls);
+        }
+      };
+      
+      // Đọc tệp hình ảnh
+      reader.readAsDataURL(image);
+    });
   };
 
   return (

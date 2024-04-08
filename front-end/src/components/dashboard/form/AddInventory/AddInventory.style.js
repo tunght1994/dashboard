@@ -30,7 +30,7 @@ export const AddInventoryWrap = styled.div`
     .btn-submit{
       width: 100px;
       height: 50px;
-      background: red;
+      background: #5D5FEF;
       border-radius: 10px;
       font-size: 15px;
       cursor: pointer;

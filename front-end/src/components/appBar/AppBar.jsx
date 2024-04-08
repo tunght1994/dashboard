@@ -4,8 +4,8 @@ import { AppBarWrap } from "./AppBar.styles";
 import AppBarLang from "./AppBarLang";
 import AppBarProfile from "./AppBarProfile";
 import { MdOutlineMenu } from "react-icons/md";
-import { useDispatch } from "react-redux";
 import { setSidebarOpen } from "../../redux/slices/sidebarSlice";
+import { useDispatch } from "react-redux";
 
 const AppBar = () => {
   const [showInputControl, setShowInputControl] = useState(false);

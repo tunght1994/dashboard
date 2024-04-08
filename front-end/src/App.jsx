@@ -12,12 +12,12 @@ const routes = [
     path: "/",
     element: <BaseLayout />,
     children: [
+      // {
+      //   path: "/",
+      //   element: <Dashboard />,
+      // },
       {
         path: "/",
-        element: <Dashboard />,
-      },
-      {
-        path: "/addInvenory",
         element: <AddInvenory />,
       },
       {

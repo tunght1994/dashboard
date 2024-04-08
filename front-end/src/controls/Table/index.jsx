@@ -51,7 +51,7 @@ const Table = ({ data = null, columns = null, hover = true, onClick, setSelected
         <tbody>
           {slice.length === 0 ? (
             <tr>
-              <td colSpan={columns.length}>
+              <td colSpan={columns.length} >
                 <EmptyData icon={Icons.Empty} text="No search results" />
               </td>
             </tr>
