@@ -28,16 +28,14 @@ const AddInvenory = () => {
       images: images
     }
     try {
-      // Make a POST request using Axios
       const response = await axios.post('http://localhost:5000/api/products', formData);
-      console.log(response.data); // Log the response from the server
-      // Clear form fields and images after successful submission
+      console.log(response.data);
       setProductName("");
       setQuantity("");
       setPrice("");
       setImages([]);
     } catch (error) {
-      console.error('Error submitting form:', error); // Log any errors
+      console.error('Error submitting form:', error); 
     }
   };
 
@@ -70,7 +68,7 @@ const AddInvenory = () => {
     <AddInventoryWrap>
       <div className="invetory-content">
         <div className="invetory-content-item">
-          <div className="value">Product Name:</div>
+          <div className="value">Tên sản phẩm</div>
           <input
             type="text"
             value={productName}
@@ -79,7 +77,7 @@ const AddInvenory = () => {
           />
         </div>
         <div className="invetory-content-item">
-          <div className="value">Quantity:</div>
+          <div className="value">Số lượng</div>
           <input
             type="number"
             value={quantity}
@@ -88,7 +86,7 @@ const AddInvenory = () => {
           />
         </div>
         <div className="invetory-content-item">
-          <div className="value">Price:</div>
+          <div className="value">Giá sản phẩm</div>
           <input
             type="number"
             value={price}
@@ -97,7 +95,7 @@ const AddInvenory = () => {
           />
         </div>
         <div className="invetory-content-item">
-          <div className="value">Images:</div>
+          <div className="value">Hình ảnh thanh toán</div>
           <input
             type="file"
             accept="image/*"
