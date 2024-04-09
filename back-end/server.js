@@ -2,9 +2,10 @@
 const express = require('express');
 // const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const Product = require('./src/models/Product');
 const cors = require('cors');
 const app = express();
+// const Inventory = require('./src/models/Inventory');
+const Inventory = require('./src/routes/inventory')
 
 const morgan =  require('morgan')
 const {default: helmet} = require('helmet');
@@ -32,28 +33,31 @@ app.use(express.urlencoded({
     extended: true
 }))
 
+
 // Routes
-app.get('/api/products', (req, res) => {
-  Product.find()
-    .then(products => res.json(products))
-    .catch(err => console.log(err));
-});
+// app.get('/api/inventory', (req, res) => {
+//   Inventory.find()
+//     .then(inventory => res.json(inventory))
+//     .catch(err => console.log(err));
+// });
 
-app.post('/api/products', (req, res) => {
-  const { productName, quantity, price, images } = req.body;
+// app.post('/api/inventory', (req, res) => {
+//   const { productName, quantity, price, images } = req.body;
 
-  const newProduct = new Product({
-    id: parseInt(Math.random()),
-    productName,
-    quantity: parseInt(quantity),
-    price: parseFloat(price),
-    images: images
-  });
+//   const newInventory = new Inventory({
+//     id: parseInt(Math.random()),
+//     productName,
+//     quantity: parseInt(quantity),
+//     price: parseFloat(price),
+//     images: images
+//   });
 
-  newProduct.save()
-    .then(product => res.json(product))
-    .catch(err => console.log(err));
-});
+//   newInventory.save()
+//     .then(inventory => res.json(inventory))
+//     .catch(err => console.log(err));
+// });
+
+app.use('/api/inventory', Inventory)
 
 
 const PORT = process.env.PORT || 5000;

@@ -1,7 +1,7 @@
 // models/Product.js
 const mongoose = require('mongoose');
 
-const ProductSchema = new mongoose.Schema({
+const InventorySchema = new mongoose.Schema({
   productName: {
     type: String,
     required: true
@@ -24,6 +24,6 @@ const ProductSchema = new mongoose.Schema({
   }
 });
 
-const Product = mongoose.model('Product', ProductSchema);
+const Inventory = mongoose.model('Inventory', InventorySchema);
 
-module.exports = Product;
+module.exports = Inventory;
