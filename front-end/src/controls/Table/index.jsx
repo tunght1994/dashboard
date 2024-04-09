@@ -15,6 +15,7 @@ import useTable from "../../hook/useTable";
 // import TableFooter from './TableFooter'
 import { Icons } from "../../assets/icons";
 import Button from "../Button";
+import convertDateTime from "../../helper/convertTime";
 
 const Table = ({ data = null, columns = null, hover = true, onClick, setSelectedIndex }) => {
   const getCaps = (head, value) => {
@@ -64,7 +65,7 @@ const Table = ({ data = null, columns = null, hover = true, onClick, setSelected
                     Array.isArray(item[col.value]) ? (
                       <Button text="Xem" onClick={() => handleClickBtn(index)}/>
                     ) : (
-                      item[col.value]
+                      colIndex === 0 ? convertDateTime(item[col.value], "DD/MM/YYYY"): item[col.value]
                     )}
                   </td>
                 ))}

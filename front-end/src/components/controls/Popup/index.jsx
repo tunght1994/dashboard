@@ -19,8 +19,8 @@ const Popup = ({ data, handleClose }) => {
       <OverlayFullScreen onClick={(e) => e.stopPropagation()}>
         <div className="wrap-inner-screen" ref={closeRef}>
           <WrapPopup>
-            {data.map((itemImg, index) => (
-              <img key={index} src={itemImg} alt="" />
+            {data.map((item, index) => (
+              <img key={index} src={item} alt="" />
             ))}
           </WrapPopup>
         </div>

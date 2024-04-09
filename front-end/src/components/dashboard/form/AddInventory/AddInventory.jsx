@@ -1,6 +1,6 @@
 // src/components/AddInformationForm.js
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AddInventoryWrap } from "./AddInventory.style";
 import axios from "axios";
@@ -10,6 +10,7 @@ const AddInvenory = () => {
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [images, setImages] = useState([]);
+  const fileInputRef = useRef(null); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,12 +29,13 @@ const AddInvenory = () => {
       images: images
     }
     try {
-      const response = await axios.post('http://localhost:5000/api/products', formData);
+      const response = await axios.post('http://localhost:5000/api/inventory', formData);
       console.log(response.data);
       setProductName("");
       setQuantity("");
       setPrice("");
       setImages([]);
+      fileInputRef.current.value = "";
     } catch (error) {
       console.error('Error submitting form:', error); 
     }
@@ -43,23 +45,15 @@ const AddInvenory = () => {
     const selectedImages = Array.from(e.target.files);
     const imageUrls = [];
   
-    // Lặp qua từng tệp hình ảnh đã chọn
     selectedImages.forEach(image => {
-      // Tạo một đối tượng FileReader
       const reader = new FileReader();
-      
-      // Định nghĩa hàm xử lý khi đọc xong tệp
       reader.onload = (event) => {
-        // Lấy đường dẫn của hình ảnh và thêm vào mảng imageUrls
         imageUrls.push(event.target.result);
         
-        // Kiểm tra nếu đã đọc xong tất cả các hình ảnh thì cập nhật state
         if (imageUrls.length === selectedImages.length) {
           setImages(imageUrls);
         }
       };
-      
-      // Đọc tệp hình ảnh
       reader.readAsDataURL(image);
     });
   };
@@ -73,7 +67,7 @@ const AddInvenory = () => {
             type="text"
             value={productName}
             onChange={(e) => setProductName(e.target.value)}
-            placeholder="Enter product name"
+            placeholder="Nhập tên sản phẩm"
           />
         </div>
         <div className="invetory-content-item">
@@ -82,7 +76,7 @@ const AddInvenory = () => {
             type="number"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
-            placeholder="Enter quantity"
+            placeholder="Nhập số lượng sản phẩm"
           />
         </div>
         <div className="invetory-content-item">
@@ -91,7 +85,7 @@ const AddInvenory = () => {
             type="number"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            placeholder="Enter price"
+            placeholder="Nhập giá tiền sản phẩm"
           />
         </div>
         <div className="invetory-content-item">
@@ -101,6 +95,7 @@ const AddInvenory = () => {
             accept="image/*"
             multiple
             className="img-file"
+            ref={fileInputRef}
             onChange={handleImageChange}
           />
         </div>

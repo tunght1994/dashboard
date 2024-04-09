@@ -13,9 +13,9 @@ const Transaction = () => {
 
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/products')
+    axios.get('http://localhost:5000/api/inventory')
       .then(res => {
-        setProducts(res.data);
+        setProducts(res.data.data);
       })
       .catch(err => {
         if (err.response) {
