@@ -1,33 +1,31 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
-const calculateRange = (data, rowsPerPage) => {
-	const range = []
-	const num = Math.ceil(data.length / rowsPerPage)
+const calculateRange = (totalPages) => {
+  const range = [];
+  for (let i = 1; i <= totalPages; i++) {
+    range.push(i);
+  }
+  return range;
+};
 
-	let i = 1
-	for (let i = 1; i <= num; i++) {
-		range.push(i)
-	}
-	return range
-}
+const useTable = (data, currentPage, itemsPerPage, total) => {
+  const [tableRange, setTableRange] = useState([]);
+  const [currentPageData, setCurrentPageData] = useState([]);
 
-const sliceData = (data, page, rowsPerPage) => {
-	return data.slice((page - 1) * rowsPerPage, page * rowsPerPage)
-}
+  useEffect(() => {
+    if (data && data.length > 0) {
+      const totalPages = Math.ceil(total / itemsPerPage);
+      const range = calculateRange(totalPages);
+      setTableRange(range);
 
-const useTable = (data, page, rowsPerPage) => {
-	const [tableRange, setTableRange] = useState([])
-	const [slice, setSlice] = useState([])
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const slicedData = data.slice(startIndex, endIndex);
+      setCurrentPageData(slicedData);
+    }
+  }, [data, currentPage, itemsPerPage, total]);
 
-	useEffect(() => {
-		const range = calculateRange(data, rowsPerPage)
-		setTableRange([...range])
+  return { currentPageData, tableRange };
+};
 
-		const slice = sliceData(data, page, rowsPerPage)
-		setSlice([...slice])
-	}, [data, setTableRange, page, setSlice, rowsPerPage])
-
-	return { slice, range: tableRange }
-}
-
-export default useTable
+export default useTable;

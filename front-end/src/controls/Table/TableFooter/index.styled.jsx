@@ -7,39 +7,27 @@ const WrapTableFooter = styled.div`
 	text-align: left;
 	font-size: 16px;
 	color: #2c3e50;
-	border: 1px #dddddd solid;
 
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
+	justify-content: center;
 	gap: 26px;
 	padding: 0 8px;
-	.footer-rows-per {
+	.pagination-controls{
 		display: flex;
 		align-items: center;
-		.dropdown-list {
-			top: -220px;
-			&-content {
-				width: 120px;
-			}
+		justify-content: center;
+		gap: 10px;
+		.pagination-button{
+			font-size: 18px;
+			cursor: pointer;
 		}
-
-		.value {
-			width: 120px;
-			display: flex;
-			align-items: center;
+		.active{
+			background: #569c59;
+			width: 20px;
+			height: 20px;
+			color: #fff;
 		}
-		.per-page {
-			border: none;
-			width: 64px;
-			background: none;
-		}
-	}
-
-	.button-arrow {
-		display: flex;
-		gap: 12px;
-		cursor: pointer;
 	}
 `
 

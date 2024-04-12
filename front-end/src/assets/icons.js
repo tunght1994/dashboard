@@ -17,9 +17,9 @@ import CardProduct from "./icons/card_product.svg";
 import CardCustomer from "./icons/card_customer.svg";
 import BagGreen from "./icons/bag_green.svg";
 import TicketYellow from "./icons/ticket_yellow.svg";
-import Empty from "./icons/image1.svg";
-import IcArrowRightActive from "./icons/ChevronRightFilled.svg";
-import IcArrowLeftActives from "./icons/ChevronLeftFilled.svg";
+import Empty from "./icons/iconEmpty.svg";
+import IcArrowRightActive from "./icons/ArrowChevronRight.svg"
+import IcArrowLeftActive from "./icons/ArrowChevronLeft.svg";
 
 export const Icons = {
   Analytics,
@@ -43,5 +43,5 @@ export const Icons = {
   TicketYellow,
   Empty,
   IcArrowRightActive,
-  IcArrowLeftActives
+  IcArrowLeftActive
 };

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSidebarClose } from "../../redux/slices/sidebarSlice";
 import { useState } from "react";
 import { menuItem } from "../../data/menuItem";
+import { getTransactionInventory } from "../../redux/transaction/transactionThunk";
 
 const Sidebar = () => {
   const [dropdownStates, setDropdownStates] = useState(Array(menuItem.length).fill(false));
@@ -16,11 +17,12 @@ const Sidebar = () => {
 
   const handleMenuClick = (index) => {
     setActiveMenu(index);
-    const newDropdownStates = [...dropdownStates];
-    newDropdownStates[index] = !newDropdownStates[index];
-    setDropdownStates(newDropdownStates);
+    // const newDropdownStates = [...dropdownStates];
+    // newDropdownStates[index] = !newDropdownStates[index];
+    // setDropdownStates(newDropdownStates);
   };
 
+ 
   return (
     <SidebarWrap className={`${isSidebarOpen ? "sidebar-open" : ""}`}>
       <div className="sidebar-top">

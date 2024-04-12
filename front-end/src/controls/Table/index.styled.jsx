@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const WrapTableListItem = styled.div`
 	width: 100%;
-	height: 676px;
+	height: 98%;
 	table {
 		width: 100%;
 		height: 100%;
@@ -10,16 +10,19 @@ const WrapTableListItem = styled.div`
 		// overflow-x: scroll;
 		display: block;
 	}
-	tbody {
-		overflow-y: scroll;
-		overflow-x: hidden;
-		height: calc(100% - 48px);
-	}
+
 	thead {
 		height: 48px;
 		background: #f6f6f6;
 	}
-
+	tbody{
+		height: 734px;
+	}
+	tr{
+		display: flex !important;
+		align-items: center;
+		justify-content: center;
+	}
 	thead,
 	tbody,
 	tr {

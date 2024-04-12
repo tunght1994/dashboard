@@ -42,7 +42,7 @@ export const GlobalStyles = createGlobalStyle`
 
     /* page settings */
     .page-wrapper{
-        min-height: 100vh;
+        min-height: 900px;
         display: flex;
         width: 100%;
     }
@@ -50,8 +50,10 @@ export const GlobalStyles = createGlobalStyle`
     .content-wrapper{
         flex: 1;
         max-width: 1600px;
+        max-height: 100%;
         margin-right: auto;
         margin-left: auto;
+        overflow: hidden;
     }
 
     .scrollbar{

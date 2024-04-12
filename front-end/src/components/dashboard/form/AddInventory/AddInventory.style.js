@@ -22,7 +22,7 @@ export const AddInventoryWrap = styled.div`
         padding: 10px 0;
       }
       .value {
-        width: 8%;
+        width: 20%;
         display: flex;
         align-items: center;
       }

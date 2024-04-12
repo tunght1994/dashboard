@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { BaseLayout } from "./components";
-import { Dashboard, PageNotFound } from "./screens";
+// import { Dashboard, PageNotFound } from "./screens";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme/theme";
 import { GlobalStyles } from "./styles/global/GlobalStyles";
 import AddInvenory from "./components/dashboard/form/AddInventory/AddInventory";
-import Transaction from "./components/dashboard/Transaction/Transaction";
+import TransactionInventory from "./components/dashboard/Transaction/TransactionInventory";
 
 const routes = [
   {
@@ -22,14 +22,14 @@ const routes = [
       },
       {
         path: "/transaction",
-        element: <Transaction />,
+        element: <TransactionInventory />,
       },
     ],
   },
-  {
-    path: "*",
-    element: <PageNotFound />,
-  },
+  // {
+  //   path: "*",
+  //   element: <PageNotFound />,
+  // },
 ];
 
 function App() {

@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AddInventoryWrap } from "./AddInventory.style";
-import axios from "axios";
+import { submitForm } from './../../../../redux/form/inventoryThunks';
 
 const AddInvenory = () => {
   const [productName, setProductName] = useState("");
@@ -11,8 +11,9 @@ const AddInvenory = () => {
   const [price, setPrice] = useState("");
   const [images, setImages] = useState([]);
   const fileInputRef = useRef(null); 
+  const dispatch = useDispatch();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (
       !productName.trim() ||
@@ -28,17 +29,8 @@ const AddInvenory = () => {
       price: price,
       images: images
     }
-    try {
-      const response = await axios.post('http://localhost:5000/api/inventory', formData);
-      console.log(response.data);
-      setProductName("");
-      setQuantity("");
-      setPrice("");
-      setImages([]);
-      fileInputRef.current.value = "";
-    } catch (error) {
-      console.error('Error submitting form:', error); 
-    }
+    dispatch(submitForm(formData));
+
   };
 
   const handleImageChange = (e) => {

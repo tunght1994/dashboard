@@ -10,7 +10,7 @@ const EmptyData = ({ icon, text, className }) => {
 	return (
 		<styles.Bound className={className}>
 			<div className="empty-container">
-				<div className="icon">{icon ? icon : Icons.Empty}</div>
+				<img src={icon ? icon : Icons.Empty} alt="" />
 				<p>{text ? text : 'There are currently no new data'}</p>
 			</div>
 		</styles.Bound>

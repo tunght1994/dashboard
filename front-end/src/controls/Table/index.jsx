@@ -1,40 +1,24 @@
-import React, { useMemo, useState } from "react";
-
-// styled
-import { WrapTableListItem } from "./index.styled";
-
-// controls
-import EmptyData from "../EmptyData";
-
-// data
-
-// hook
-import useTable from "../../hook/useTable";
-
-// component
-// import TableFooter from './TableFooter'
+import React from "react";
 import { Icons } from "../../assets/icons";
 import Button from "../Button";
 import convertDateTime from "../../helper/convertTime";
+import EmptyData from "../EmptyData";
+import TableFooter from "./TableFooter";
+import useTable from "../../hook/useTable";
+import { WrapTableListItem } from "./index.styled";
 
-const Table = ({ data = null, columns = null, hover = true, onClick, setSelectedIndex }) => {
+const Table = ({ data = null, columns = null, hover = true, total, setSelectedIndex, page, itemsPerPage, onChange }) => {
+  
   const getCaps = (head, value) => {
     if (head) return head;
     return value;
   };
 
-  const [page, setPage] = useState(1);
-  const [selectedOption, setSelectedOption] = useState(10);
-
-  const { slice, range } = useTable(data, page, selectedOption);
-
-  const handleChangePage = (pageNumber) => {
-    setPage(pageNumber);
-  };
+  const { currentPageData: slice, tableRange: range } = useTable(data, page, itemsPerPage, total);
 
   const handleClickBtn = (index) => {
-    setSelectedIndex(index)
-  }
+    setSelectedIndex(index);
+  };
 
   return (
     <WrapTableListItem styledWidth={columns.length}>
@@ -52,20 +36,20 @@ const Table = ({ data = null, columns = null, hover = true, onClick, setSelected
         <tbody>
           {slice.length === 0 ? (
             <tr>
-              <td colSpan={columns.length} >
+              <td colSpan={columns.length}>
                 <EmptyData icon={Icons.Empty} text="No search results" />
               </td>
             </tr>
           ) : (
-            slice.map((item, index) => (
+            slice?.map((item, index) => (
               <tr className={`${hover && "hover"}`} key={index}>
                 {columns.map((col, colIndex) => (
-                  <td className="value" key={colIndex} >
+                  <td className="value" key={colIndex}>
                     {colIndex === columns.length - 1 &&
                     Array.isArray(item[col.value]) ? (
-                      <Button text="Xem" onClick={() => handleClickBtn(index)}/>
+                      <Button text="Xem" onClick={() => handleClickBtn(index)} />
                     ) : (
-                      colIndex === 0 ? convertDateTime(item[col.value], "DD/MM/YYYY"): item[col.value]
+                      colIndex === 0 ? convertDateTime(item[col.value], "DD/MM/YYYY") : item[col.value]
                     )}
                   </td>
                 ))}
@@ -74,15 +58,12 @@ const Table = ({ data = null, columns = null, hover = true, onClick, setSelected
           )}
         </tbody>
       </table>
-      {/* <TableFooter
-				onChangePage={handleChangePage}
-				data={data}
-				slice={slice}
-				page={page}
-				range={range}
-				selectedOption={selectedOption}
-				setSelectedOption={setSelectedOption}
-			/> */}
+      <TableFooter
+        page={page}
+        range={range}
+        totalPages={range}
+        onChangePage={onChange}
+      />
     </WrapTableListItem>
   );
 };
