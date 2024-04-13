@@ -18,7 +18,7 @@ const InventorySchema = new mongoose.Schema({
     type: [String],
     required: true
   },
-  date: {
+  createAt: {
     type: Date,
     default: Date.now
   }

@@ -2,6 +2,19 @@
 
 const Inventory = require("../models/Inventory");
 
+
+const removeAllData = async () => {
+  try {
+    await Inventory.deleteMany({});
+    console.log('All data removed successfully.');
+  } catch (error) {
+    console.error('Error removing data:', error);
+  }
+};
+
+// Gọi hàm để xóa tất cả dữ liệu
+// removeAllData()
+
 const getAllInventory = async (req, res, next) => {
   try {
     let limit = parseInt(req.query.limit) || 0; 
@@ -11,8 +24,7 @@ const getAllInventory = async (req, res, next) => {
     if (lastId) {
       query._id = { $gt: lastId }; 
     }
-
-    const inventory = await Inventory.find(query).limit(limit); 
+    const inventory = await Inventory.find(query).sort({ createAt: -1 }).limit(limit);
     const totalInventoryCount = await Inventory.countDocuments();
     
     res.status(200).json({
@@ -37,7 +49,11 @@ const createInventory = async (req, res, next) => {
   }
 };
 
+
+
+
+
 module.exports = {
   getAllInventory,
-  createInventory,
+  createInventory
 };

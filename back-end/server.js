@@ -6,6 +6,7 @@ const cors = require('cors');
 const app = express();
 // const Inventory = require('./src/models/Inventory');
 const Inventory = require('./src/routes/inventory')
+const Export = require('./src/routes/export')
 
 const morgan =  require('morgan')
 const {default: helmet} = require('helmet');
@@ -14,6 +15,8 @@ const compression = require("compression");
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 // const uri = "mongodb+srv://hothanhtung12:gDUOhoO2bUC4itCF@cluster0.ib0vmxo.mongodb.net/";
 
@@ -57,7 +60,9 @@ app.use(express.urlencoded({
 //     .catch(err => console.log(err));
 // });
 
+
 app.use('/api/inventory', Inventory)
+app.use('/api/export', Export)
 
 
 const PORT = process.env.PORT || 5000;
