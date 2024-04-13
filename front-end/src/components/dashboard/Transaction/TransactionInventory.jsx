@@ -24,12 +24,12 @@ const TransactionInventory = () => {
   useEffect(() => {
     dispatch(getTransactionInventory(itemsPerPage, "", false));
   }, []);
+
   useScrollEnd(listRef, () => {
-    if (listTransactionInventory.length < totalListTransactionInventory) {
-      const lastId = listTransactionInventory[listTransactionInventory.length - 1]?._id;
-      dispatch(getTransactionInventory(itemsPerPage, lastId, true));
-    }
-  }, [listTransactionInventory, totalListTransactionInventory], [listTransactionInventory.length]);
+    const lastId = listTransactionInventory[listTransactionInventory.length - 1]?._id;
+    dispatch(getTransactionInventory(itemsPerPage, lastId, true));
+    console.log('first')
+  }, [listTransactionInventory], [listTransactionInventory.length]);
 
   return (
     <TransactionWrap>

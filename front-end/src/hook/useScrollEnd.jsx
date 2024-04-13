@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 
-const EPSILON = 12
+const EPSILON = 10
 
 const useScrollEnd = (scrollEleRef, callback, dependencies=[], dependenciesScroll=[]) => {
     const isRunningCallback = useRef(false)
@@ -27,6 +27,7 @@ const useScrollEnd = (scrollEleRef, callback, dependencies=[], dependenciesScrol
             // check scroll down
             const valueCheck = scrollEle.scrollTop;
             const isScrollDown = valueCheck >= lastScrollTop.current
+            // console.log('isScrollDown', isScrollDown)
             lastScrollTop.current = valueCheck <= 0 ? 0 : valueCheck
             if(!isScrollDown) {
                 return;
@@ -35,7 +36,6 @@ const useScrollEnd = (scrollEleRef, callback, dependencies=[], dependenciesScrol
 
             // check to end of scroll
             const { scrollHeight, scrollTop, clientHeight } = scrollEle
-            // console.log(scrollHeight, scrollTop + clientHeight)
             const condActiveCallback = scrollHeight - scrollTop - clientHeight <= EPSILON
             if(!condActiveCallback) return;
             isRunningCallback.current = true
