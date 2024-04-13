@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AddInventoryWrap } from "./AddInventory.style";
-import { submitForm } from './../../../../redux/form/inventoryThunks';
+import { submitForm } from '../../../../redux/form/inventoryThunk';
 
 const AddInvenory = () => {
   const [productName, setProductName] = useState("");
@@ -30,7 +30,10 @@ const AddInvenory = () => {
       images: images
     }
     dispatch(submitForm(formData));
-
+    setProductName("")
+    setQuantity("")
+    setPrice("")
+    fileInputRef.current.value = ""
   };
 
   const handleImageChange = (e) => {

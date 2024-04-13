@@ -6,6 +6,8 @@ import { theme } from "./styles/theme/theme";
 import { GlobalStyles } from "./styles/global/GlobalStyles";
 import AddInvenory from "./components/dashboard/form/AddInventory/AddInventory";
 import TransactionInventory from "./components/dashboard/Transaction/TransactionInventory";
+import { useSelector } from "react-redux";
+import LoadingFullScreen from './controls/Loading/index';
 
 const routes = [
   {
@@ -33,8 +35,11 @@ const routes = [
 ];
 
 function App() {
+  const loading = useSelector((state) => state.loading.loading);
+
   return (
     <>
+      {loading && <LoadingFullScreen />}
       <ThemeProvider theme={theme}>
         <Router>
           <GlobalStyles />

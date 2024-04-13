@@ -12,7 +12,7 @@ const TransactionIventoryItem = ({ item, setSelectedIndex, index}) => {
   return (
     <WrapTransactionInventoryItem >
         <div className="content-item">
-          <div>{convertDateTime(item.date, "DD/MM/YYYY")}</div>
+          <div>{convertDateTime(item.createAt, "DD/MM/YYYY")}</div>
           <div>{item.productName}</div>
           <div>{item.quantity}</div>
           <div>{item.price}</div>

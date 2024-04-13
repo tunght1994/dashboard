@@ -8,6 +8,21 @@ export const TransactionWrap = styled.div`
     flex: 1;
     display: flex;
     flex-direction: column;
+    .transaction-filter{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        &-export{
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            .icon-export{
+                width: 30px;
+    
+            }
+
+        }
+    }
     .transaction-list{
         height: 96%;
         .header {

@@ -11,14 +11,14 @@ const inventorySlice = createSlice({
     initialState,
     reducers: {
         submitFormStart(state) {
-            state.loading = true,
-           state.error = null
+        state.loading = true,
+        state.error = null
         },
         submitFormSuccess(state) {
             state.loading = false
         },
         submitFormFailed(state, action) {
-            state.loading = false,
+        state.loading = false,
            state.error = action.payload
         }
     }

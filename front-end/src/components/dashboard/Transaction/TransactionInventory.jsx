@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { TransactionWrap } from "./TransactionInventory.style";
 import { dataHeaderListLocator } from "../../../data/dataTransaction";
 import { useDispatch, useSelector } from 'react-redux';
-import { getTransactionInventory } from "../../../redux/transaction/transactionThunk";
+import { exportDataToExcel, getTransactionInventory } from "../../../redux/transaction/transactionThunk";
 import EmptyData from "../../../controls/EmptyData";
 import { Icons } from "../../../assets/icons";
 import TransactionIventoryItem from "./TransactionIventoryItem";
@@ -30,6 +30,12 @@ const TransactionInventory = () => {
     dispatch(getTransactionInventory(itemsPerPage, lastId, true));
     console.log('first')
   }, [listTransactionInventory], [listTransactionInventory.length]);
+  
+
+  const handleExport = () => {
+    if(listTransactionInventory.length === 0) return
+    dispatch(exportDataToExcel());
+  };
 
   return (
     <TransactionWrap>
@@ -38,6 +44,12 @@ const TransactionInventory = () => {
       ) : (
         ""
       )}
+      <div className="transaction-filter">
+        <div className="transaction-filter-export" onClick={handleExport}>
+          <img src={Icons.IcExport} alt="IcExport" className="icon-export"/>
+          <div className="text">Export</div>
+        </div>
+      </div>
       <div className="transaction-list">
         <div className="header">
           {dataHeaderListLocator &&

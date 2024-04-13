@@ -20,6 +20,7 @@ import TicketYellow from "./icons/ticket_yellow.svg";
 import Empty from "./icons/iconEmpty.svg";
 import IcArrowRightActive from "./icons/ArrowChevronRight.svg"
 import IcArrowLeftActive from "./icons/ArrowChevronLeft.svg";
+import IcExport from "./icons/iconExport.svg";
 
 export const Icons = {
   Analytics,
@@ -43,5 +44,6 @@ export const Icons = {
   TicketYellow,
   Empty,
   IcArrowRightActive,
-  IcArrowLeftActive
+  IcArrowLeftActive,
+  IcExport
 };
