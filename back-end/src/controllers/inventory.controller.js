@@ -2,7 +2,7 @@
 
 const Inventory = require("../models/Inventory");
 
-
+// Hàm để xóa tất cả dữ liệu
 const removeAllData = async () => {
   try {
     await Inventory.deleteMany({});
@@ -12,7 +12,6 @@ const removeAllData = async () => {
   }
 };
 
-// Gọi hàm để xóa tất cả dữ liệu
 // removeAllData()
 
 const getAllInventory = async (req, res, next) => {
@@ -22,11 +21,13 @@ const getAllInventory = async (req, res, next) => {
     let query = {};
 
     if (lastId) {
-      query._id = { $gt: lastId }; 
+      query._id = { $gt: lastId };
     }
-    const inventory = await Inventory.find(query).sort({ createAt: -1 }).limit(limit);
+    const inventory = await Inventory.find(query)
+                                     .limit(limit);
+
     const totalInventoryCount = await Inventory.countDocuments();
-    
+    console.log(inventory.length)
     res.status(200).json({
       code: 200,
       data: inventory,

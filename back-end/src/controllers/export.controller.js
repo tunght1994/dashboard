@@ -6,12 +6,12 @@ const Inventory = require("../models/Inventory");
 
 const exportDataInventory = async (req, res, next) => {
     try {
-      const allData = await Inventory.find();
+      const allData = await Inventory.find().sort({ createAt: -1 });
       const workbook = new ExcelJS.Workbook();
       const worksheet = workbook.addWorksheet('Inventory');
   
       worksheet.columns = [
-        { header: 'Ngày thanh toán', key: 'date', width: 20 },
+        { header: 'Ngày thanh toán', key: 'createAt', width: 20 },
         { header: 'Tên sản phẩm', key: 'productName', width: 30 },
         { header: 'Số lượng', key: 'quantity', width: 30 },
         { header: 'Giá sản phẩm', key: 'price', width: 30 },
@@ -19,7 +19,7 @@ const exportDataInventory = async (req, res, next) => {
   
       allData.forEach((item) => {
         worksheet.addRow({
-          date: item.date,
+          createAt: item.createAt,
           productName: item.productName,
           quantity: item.quantity,
           price: item.price,
