@@ -1,13 +1,14 @@
-import React from 'react'
-import { WrapTransactionInventoryItem } from './index.styles'
+import React, { useEffect, useState } from 'react'
+import { WrapTransactionInventoryItem } from './index.style'
 import convertDateTime from '../../../../helper/convertTime'
 import Button from '../../../../controls/Button'
+import Portal from './../../../../controls/Portal/index';
+import PopupShowImage from './PopupShowImage';
 
-const TransactionIventoryItem = ({ item, setSelectedIndex, index}) => {
+const TransactionIventoryItem = ({ item }) => {
 
-  const handleSelectedIndex = (index) => {
-    setSelectedIndex(index);
-  };
+  const [isShowImage, setIsShowImage] = useState(false)
+
 
   return (
     <WrapTransactionInventoryItem >
@@ -16,9 +17,15 @@ const TransactionIventoryItem = ({ item, setSelectedIndex, index}) => {
           <div>{item.productName}</div>
           <div>{item.quantity}</div>
           <div>{item.price}</div>
-          <Button text="Xem" onClick={() => handleSelectedIndex(index)}/>
+          <Button text="Xem" onClick={() => setIsShowImage(true)}/>
         </div>
-        
+        {
+          isShowImage && (
+            <Portal>
+                <PopupShowImage items={item.images} closePopup={() => setIsShowImage(false)}/>
+            </Portal>
+          )
+        }
     </WrapTransactionInventoryItem>
   )
 }

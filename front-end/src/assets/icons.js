@@ -21,6 +21,7 @@ import Empty from "./icons/iconEmpty.svg";
 import IcArrowRightActive from "./icons/ArrowChevronRight.svg"
 import IcArrowLeftActive from "./icons/ArrowChevronLeft.svg";
 import IcExport from "./icons/iconExport.svg";
+import IcAdd from "./icons/ic_add.svg";
 
 export const Icons = {
   Analytics,
@@ -45,5 +46,6 @@ export const Icons = {
   Empty,
   IcArrowRightActive,
   IcArrowLeftActive,
-  IcExport
+  IcExport,
+  IcAdd
 };

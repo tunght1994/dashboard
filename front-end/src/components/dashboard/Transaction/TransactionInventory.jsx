@@ -8,9 +8,11 @@ import { Icons } from "../../../assets/icons";
 import TransactionIventoryItem from "./TransactionIventoryItem";
 
 import useScrollEnd from "../../../hook/useScrollEnd";
+import Portal from "../../../controls/Portal";
+import AddInvenory from "../form/AddInventory/AddInventory";
 
 const TransactionInventory = () => {
-  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [isShowPopupAddInventory, setIsShowPopupAddInventory] = useState(false);
   const itemsPerPage = 13;
   const listRef = useRef();
 
@@ -26,27 +28,34 @@ const TransactionInventory = () => {
   }, []);
 
   useScrollEnd(listRef, () => {
-    const lastId = listTransactionInventory[listTransactionInventory.length - 1]?._id;
+    const lastId = listTransactionInventory[listTransactionInventory.length - 1]?._id
     dispatch(getTransactionInventory(itemsPerPage, lastId, true));
-    console.log('first')
   }, [listTransactionInventory], [listTransactionInventory.length]);
-  
+
 
   const handleExport = () => {
-    if(listTransactionInventory.length === 0) return
+    if (listTransactionInventory.length === 0) return
     dispatch(exportDataToExcel());
+  };
+
+  const handleShowPopupAddInventory = () => {
+    setIsShowPopupAddInventory(true)
   };
 
   return (
     <TransactionWrap>
-      {selectedIndex !== null ? (
-        <></>
-      ) : (
-        ""
-      )}
       <div className="transaction-filter">
-        <div className="transaction-filter-export" onClick={handleExport}>
-          <img src={Icons.IcExport} alt="IcExport" className="icon-export"/>
+        <div className="transaction-filter-content" onClick={handleShowPopupAddInventory}>
+          <img src={Icons.IcAdd} alt="IcAdd" className="icon" />
+          <div className="text">Add Inventory</div>
+        </div>
+        {
+          isShowPopupAddInventory && <Portal>
+            <AddInvenory closePopup={() => setIsShowPopupAddInventory(false)} itemsPerPage={itemsPerPage}/>
+          </Portal>
+        }
+        <div className="transaction-filter-content" onClick={handleExport}>
+          <img src={Icons.IcExport} alt="IcExport" className="icon" />
           <div className="text">Export</div>
         </div>
       </div>
@@ -67,7 +76,7 @@ const TransactionInventory = () => {
               <div className="list-transaction">
                 {
                   listTransactionInventory?.map((item, index) => (
-                    <TransactionIventoryItem key={index} item={item} index={index} setSelectedIndex={setSelectedIndex} selectedIndex={selectedIndex} />
+                    <TransactionIventoryItem key={index} item={item} index={index} />
                   ))
                 }
               </div>

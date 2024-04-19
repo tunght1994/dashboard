@@ -15,6 +15,8 @@ export const GlobalStyles = createGlobalStyle`
         font-size: 16px;
         line-height: 1.6;
         background: ${(props) => props.theme.colors.seasalt};
+        position: relative;
+
     }
 
     html {

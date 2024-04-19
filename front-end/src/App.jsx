@@ -18,12 +18,12 @@ const routes = [
       //   path: "/",
       //   element: <Dashboard />,
       // },
+      // {
+      //   path: "/",
+      //   element: <AddInvenory />,
+      // },
       {
         path: "/",
-        element: <AddInvenory />,
-      },
-      {
-        path: "/transaction",
         element: <TransactionInventory />,
       },
     ],

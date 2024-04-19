@@ -26,28 +26,28 @@ export const menuItem = [
     //     "value": "Sales Report",
     //     "path" : '/'
     // },
-    {
-        "icon": Icons.Analytics,
-        "value": "Form",
-        "path" : '/',
-        "fromDropdown" : [
-            // {
-            //     "value": "Add Inventory",
-            //     "icon": Icons.Analytics,
-            //     "path": "/addInvenory"
-            // },
-            // {
-            //     "value": "Add User",
-            //     "icon": Icons.Analytics,
-            //     "path": "/addInvenory"
+    // {
+    //     "icon": Icons.Analytics,
+    //     "value": "Form",
+    //     "path" : '/',
+    //     "fromDropdown" : [
+    //         // {
+    //         //     "value": "Add Inventory",
+    //         //     "icon": Icons.Analytics,
+    //         //     "path": "/addInvenory"
+    //         // },
+    //         // {
+    //         //     "value": "Add User",
+    //         //     "icon": Icons.Analytics,
+    //         //     "path": "/addInvenory"
 
-            // }
-        ]
-    },
+    //         // }
+    //     ]
+    // },
     {
         "icon": Icons.Message,
         "value": "Transaction",
-        "path" : '/transaction'
+        "path" : '/'
     },
     // {
     //     "icon": Icons.Message,

@@ -4,11 +4,14 @@ import { BlockWrapStyles } from "../../../../styles/global/default";
 export const AddInventoryWrap = styled.div`
   ${BlockWrapStyles}
   margin: 16px;
-
-  height: calc(100% - 73px);
+  z-index: 2000;
+  position: relative;
+  height: 380px;
   .invetory-content {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
     gap: 10px;
     &-item {
       display: flex;
@@ -28,7 +31,7 @@ export const AddInventoryWrap = styled.div`
       }
     }
     .btn-submit{
-      width: 100px;
+      width: 100%;
       height: 50px;
       background: #5D5FEF;
       border-radius: 10px;

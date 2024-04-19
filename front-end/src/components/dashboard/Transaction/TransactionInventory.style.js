@@ -10,16 +10,16 @@ export const TransactionWrap = styled.div`
     flex-direction: column;
     .transaction-filter{
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
         align-items: center;
-        &-export{
+        margin-bottom: 10px;
+        &-content{
             display: flex;
             align-items: center;
             cursor: pointer;
-            .icon-export{
-                width: 30px;
-    
-            }
+        }
+        .icon{
+            width: 30px;
 
         }
     }
