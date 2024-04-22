@@ -18,18 +18,19 @@ const TransactionInventory = () => {
 
   const dispatch = useDispatch();
 
-  const { listTransactionInventory, totalListTransactionInventory } = useSelector((state) => ({
+  const { listTransactionInventory, totalListTransactionInventory, currentPage } = useSelector((state) => ({
     listTransactionInventory: state.transactionInventory.transactionList,
-    totalListTransactionInventory: state.transactionInventory.total
+    totalListTransactionInventory: state.transactionInventory.total,
+    currentPage: state.transactionInventory.currentPage
   }));
 
   useEffect(() => {
-    dispatch(getTransactionInventory(itemsPerPage, "", false));
+    dispatch(getTransactionInventory(itemsPerPage, "", currentPage, false));
   }, []);
 
   useScrollEnd(listRef, () => {
     const lastId = listTransactionInventory[listTransactionInventory.length - 1]?._id
-    dispatch(getTransactionInventory(itemsPerPage, lastId, true));
+    dispatch(getTransactionInventory(itemsPerPage, lastId, currentPage, true));
   }, [listTransactionInventory], [listTransactionInventory.length]);
 
 

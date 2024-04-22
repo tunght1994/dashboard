@@ -9,7 +9,7 @@ import axios from "axios";
 const host = "http://localhost:5000";
 
 export const getTransactionInventory =
-  (limit, lastId, isScrolling = false) =>
+  (limit, lastId, currentPage, isScrolling = false) =>
   async (dispatch) => {
     dispatch(setLoadingState(true))
     try {
@@ -18,12 +18,14 @@ export const getTransactionInventory =
         params: {
           limit: limit,
           lastId: lastId,
+          currentPage: currentPage
         },
       });
       // console.log(response.data.data)
       dispatch(
         fetchTransactionSuccess({
           data: response.data.data || [],
+          currentPage: response.data.nextPage,
           totalInventoryCount: response.data.totalInventoryCount,
           isScrolling,
         })

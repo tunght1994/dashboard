@@ -5,6 +5,7 @@ const initialState = {
     transactionList: [],
     total: 0,
     loading: false,
+    currentPage: 0,
     error: null
 }
 
@@ -18,7 +19,8 @@ const transactionSlice = createSlice({
         fetchTransactionSuccess: (state, actions) => {
             state.loading = actions.payload.loading,
             state.transactionList = actions.payload.isScrolling ? [...state.transactionList ,...actions.payload.data] : actions.payload.data,
-            state.total = actions.payload.totalInventoryCount
+            state.total = actions.payload.totalInventoryCount,
+            state.currentPage = actions.payload.currentPage
         },
         fetchTransactionFailed: (state, actions) => {
             state.loading = actions.payload,
