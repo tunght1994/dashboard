@@ -6,32 +6,34 @@ const Inventory = require("../models/Inventory");
 const removeAllData = async () => {
   try {
     await Inventory.deleteMany({});
-    console.log('All data removed successfully.');
+    console.log("All data removed successfully.");
   } catch (error) {
-    console.error('Error removing data:', error);
+    console.error("Error removing data:", error);
   }
 };
 
-// removeAllData()
+// removeAllData() // api nay dung khong anh he
 
 const getAllInventory = async (req, res, next) => {
   try {
-    let limit = parseInt(req.query.limit) || 0; 
+    let limit = parseInt(req.query.limit) || 0;
     let lastId = req.query.lastId;
+    let currentPage = req.query.currentPage ? +req.query.currentPage : 0;
+    
     let query = {};
 
     if (lastId) {
       query._id = { $gt: lastId };
     }
-    const inventory = await Inventory.find(query)
-                                     .limit(limit);
-
+    const inventory = await Inventory.find().sort({createAt: -1})
+      .skip(lastId ? (limit * currentPage) : 0)
+      .limit(limit);
     const totalInventoryCount = await Inventory.countDocuments();
-    console.log(inventory.length)
     res.status(200).json({
       code: 200,
       data: inventory,
-      totalInventoryCount: totalInventoryCount
+      totalInventoryCount: totalInventoryCount,
+      nextPage: currentPage + 1
     });
   } catch (error) {
     res.status(500).json({ msg: error });
@@ -50,11 +52,7 @@ const createInventory = async (req, res, next) => {
   }
 };
 
-
-
-
-
 module.exports = {
   getAllInventory,
-  createInventory
+  createInventory,
 };
