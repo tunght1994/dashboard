@@ -25,48 +25,36 @@ const AddInvenory = ({ closePopup, itemsPerPage }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      !productName.trim() ||
-      !quantity.trim() ||
-      !price.trim() ||
-      images.length === 0
-    )
+  
+    if (!productName.trim() || !quantity.trim() || !price.trim() || images.length === 0) {
       return;
-
-    const formData = {
-      productName: productName,
-      quantity: quantity,
-      price: price,
-      images: images
     }
-    dispatch(submitForm(formData, callbackSuccess));
-    setProductName("")
-    setQuantity("")
-    setPrice("")
-    fileInputRef.current.value = ""
+  
+    const formData = new FormData();
+    formData.append('productName', productName);
+    formData.append('quantity', quantity);
+    formData.append('price', price);
+    images.forEach((image) => {
+      formData.append('image', image);
+    });
+  
+    dispatch(submitForm(formData, callbackSuccess))
+    setProductName("");
+    setQuantity("");
+    setPrice("");
+    fileInputRef.current.value = "";
+
   };
+  
 
   const handleImageChange = (e) => {
     const selectedImages = Array.from(e.target.files);
-    const imageUrls = [];
-  
     selectedImages.forEach(image => {
-      // // Kiểm tra kích thước ở đây
-      // if (image.size > YOUR_SIZE_LIMIT_IN_BYTES) {
-      //   // Xử lý logic nếu kích thước vượt quá giới hạn
-      //   console.log(`Hình ảnh ${image.name} vượt quá kích thước cho phép`);
-      //   return; // Ngừng xử lý nếu kích thước vượt quá giới hạn
-      // }
-  
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        imageUrls.push(event.target.result);
-        
-        if (imageUrls.length === selectedImages.length) {
-          setImages(imageUrls);
-        }
-      };
-      reader.readAsDataURL(image);
+      if (image.size > 1000000) {
+        console.log(`Hình ảnh ${image.name} vượt quá kích thước cho phép`);
+        return; 
+      }
+      setImages(prevImages => [...prevImages, image]);
     });
   };
 
@@ -109,7 +97,6 @@ const AddInvenory = ({ closePopup, itemsPerPage }) => {
                 <input
                   type="file"
                   accept="image/*"
-                  multiple
                   className="img-file"
                   ref={fileInputRef}
                   onChange={handleImageChange}
